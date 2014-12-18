@@ -1,4 +1,4 @@
-###Ole Cierraojos 
+#Ole Cierraojos 
 
 
 El proyecto Ole es un juego con realidad aumentada creado para entrenar en comprensión lectora.
@@ -8,11 +8,11 @@ El proyecto está creado usando el IDE de Unity 4.6.
 La parte de Realidad Aumentada está construida sobre Vuforia.
 
 ----------------------------------------------------------------------------------------------------
-#Para descargar el código
+##Para descargar el código
 
 Simplemente instale Github y haga un pull del repositorio en su disco local.
 
-#Para correr el código
+##Para correr el código
 
  - 1) Abra su Unity3D versión 4.5 o superior.
  - 2) Abra el proyecto que se encuentra en la carpeta que descargó usando GitHub
