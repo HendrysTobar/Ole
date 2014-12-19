@@ -18,11 +18,11 @@ public class ObjetoAR : MonoBehaviour {
 	{
 #if UNITY_ANDROID
 		if(Touched())
-#endif
+
 		{
 			OnMouseDown();
 		}
-
+#endif
 	}
 
 
