@@ -39,8 +39,10 @@ public class ObjetoAR : MonoBehaviour {
 			//Si el rayo golpea algo
 			if(Physics.Raycast(ray, out hitInfo))
 			{
-				if(hitInfo.collider.gameObject == this.gameObject)
+				Debug.Log("Algo golpeo");
+				if(hitInfo.collider.gameObject == this.gameObject || hitInfo.collider.gameObject == this.transform.parent.gameObject)
 				{
+
 					return true;
 				}
 			}
@@ -56,13 +58,13 @@ public class ObjetoAR : MonoBehaviour {
 
 	void OnMouseDown()
 	{
-		Debug.Log("Hola");
+
 		ToggleName();
 
 	}
 
 
-	void ToggleName ()
+	public void ToggleName ()
 	{
 
 		Text t = textComponent;
