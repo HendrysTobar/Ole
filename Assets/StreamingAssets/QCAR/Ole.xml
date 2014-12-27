@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
   <Tracking>
-    <ImageTarget name="IntroduccionElfo" size="200.000000 266.521515" />
-    <ImageTarget name="Portada" size="200.000000 266.530609" />
     <ImageTarget name="Pagina2" size="200.000000 290.702942" />
+    <ImageTarget name="Portada" size="200.000000 266.530609" />
+    <ImageTarget name="Pagina1" size="200.000000 268.361267" />
   </Tracking>
 </QCARConfig>
