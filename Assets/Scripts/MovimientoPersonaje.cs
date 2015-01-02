@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(CharacterController))]
-public class MovimientoPersonaje : MonoBehaviour {
+public class MovimientoPersonaje : MonoBehaviour 
+{
 
 	/// <summary>
 	/// Variables privadas 
@@ -11,6 +13,7 @@ public class MovimientoPersonaje : MonoBehaviour {
 	Plane groundPlane;
 	Vector3 destination;
 
+	EventSystem eventSystem;
 
 	/// <summary>
 	/// Variables publicas editables desde el inspector 
@@ -24,18 +27,25 @@ public class MovimientoPersonaje : MonoBehaviour {
 		cc = GetComponent<CharacterController>();
 		groundPlane = new Plane(transform.parent.up, transform.parent.position);
 		destination = transform.position;
+
+		eventSystem = GameObject.Find ("EventSystem").GetComponent<EventSystem>();
+
 	
 	}
 	
 	// Update is called once per frame
 	void LateUpdate () {
 
-		Vector3 d = Capture3DClickPosition();
-		if(d != Vector3.zero)
+		//Si no se esta dando click en un objeto de la GUI
+		if(eventSystem.currentSelectedGameObject == null)
 		{
-			destination = d;
-			PlaceFlare(d);
-			move = true;
+			Vector3 d = Capture3DClickPosition();
+			if(d != Vector3.zero)
+			{
+				destination = d;
+				PlaceFlare(d);
+				move = true;
+			}
 		}
 
 		Vector3 vel = destination - transform.position;
@@ -49,6 +59,7 @@ public class MovimientoPersonaje : MonoBehaviour {
 
 	Vector3 Capture3DClickPosition ()
 	{
+
 		Vector3 xy = Vector3.zero;
 		if (Input.GetMouseButtonDown(0))
 		{
