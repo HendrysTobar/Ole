@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class ObjetoAR : MonoBehaviour {
 
 	public string nombre;
-	public Text textComponent;
+	public GameObject textComponent;
 	private AudioSource[] audios;
 	// Use this for initialization
 	void Start () 
@@ -67,29 +67,17 @@ public class ObjetoAR : MonoBehaviour {
 	public void ToggleName ()
 	{
 
-		Text t = textComponent;
-		Color c = t.color;
-		c.a = c.a < 255?255:0;
-		t.color = c;
+		textComponent.SetActive(!textComponent.activeSelf);
 
-		PlaySound(t.color.a);
+		PlaySound(textComponent.activeSelf);
 
 	}
 	
 
-	void PlaySound (float a)
+	void PlaySound (bool a)
 	{
-		if(audios.Length > 0)
-		{
-			if(a < 255)
-				audios[0].Play();
-			else
-				audios[1].Play();
 
-
-
-
-		}
+		audios[textComponent.activeSelf?1:0].Play();
 
 
 	}

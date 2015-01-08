@@ -32,6 +32,7 @@ public class Elfo : MonoBehaviour {
 
 			Boy b = ninyo.GetComponent<Boy>();
 			b.Dormirse();
+			isTouchingBoy = false;
 		
 
 		}
