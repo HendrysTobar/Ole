@@ -4,6 +4,8 @@ using System.Collections;
 public class Elfo : MonoBehaviour {
 
 	public ParticleSystem polvosMagicos;
+	public GameObject sombrillaNegra;
+	public GameObject sombrillaBlanca;
 	public AudioClip shimmer;
 	// Use this for initialization
 	void Start () {
@@ -35,6 +37,41 @@ public class Elfo : MonoBehaviour {
 		}
 	}
 
+	public void LanzarSombrilla(bool negra)
+	{
+		Object sombrilla;
+		//Si es negra
+		if (negra == true) 
+		{
+			//Entonces poner sombrilla negra
+			sombrilla = Instantiate(sombrillaNegra,polvosMagicos.transform.position, sombrillaNegra.transform.rotation);
+
+
+		}
+		//Sino
+		else
+		{
+			///Enonces poner Sombrilla blanca
+			sombrilla = Instantiate(sombrillaBlanca,polvosMagicos.transform.position, sombrillaBlanca.transform.rotation); 
+
+		}
+		Destroy(sombrilla, 1.0f);
+
+		//Reproducir Sonido de Chispas
+		audio.PlayOneShot(shimmer);
+		
+		/*if(isTouchingBoy)
+		{
+			//Poner a dormir al niño ;)
+			
+			Boy b = ninyo.GetComponent<Boy>();
+			b.Dormirse();
+			
+			
+		}*/
+
+
+	}
 	bool isTouchingBoy = false;
 	private GameObject ninyo;
 	void OnTriggerEnter(Collider c)
