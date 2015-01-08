@@ -233,12 +233,16 @@ public static class SDialogManager {
 		if(d.avatar1 != null){
 			Transform tfav1 = (Object.Instantiate(d.avatar1) as GameObject).transform; // instantiate
 			tfav1.transform.parent = go.transform; // reparents the avatar
+			//Esto es para modificar la rotacion hacia el padre
+			tfav1.transform.localRotation = Quaternion.identity;
 			tfav1.name = dlgAvatar1; // force set the name
 		}
 		// sets the avatar 2 (if available)
 		if(d.avatar2 != null){
 			Transform tfav2 = (Object.Instantiate(d.avatar2) as GameObject).transform; // instantiate
 			tfav2.transform.parent = go.transform; // reparents the avatar
+			//Esto es para modificar la rotacion hacia el padre
+			tfav2.transform.localRotation = Quaternion.identity;
 			tfav2.name = dlgAvatar2; // force set the name
 		}
 		go.GetComponent<SDialogController>().StartCoroutine(showAvatar(d) );
