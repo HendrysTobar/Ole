@@ -1,0 +1,24 @@
+Created by Kurayami88
+Bug reports are welcome~!
+Feedback & Suggestions will be great!
+
+Latest version of package used :-
+Unity 4.6.0 f3
+
+
+##############
+Changelog
+##############
+
+v 1.0.0
+-------------------------
+Initial Release
+
+Features :-
+* Text properties editable
+* Dialog anchors
+* Dialog size in screen percentage
+* Multi-screen resolution adaptable
+* Up to two avatar display support + Anchored positions
+* Avatar color & size transition support
+* Optional script method calls during OnDialogDisplayed / OnTextShown / OnDialogExit

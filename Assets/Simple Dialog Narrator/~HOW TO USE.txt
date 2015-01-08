@@ -1,0 +1,45 @@
+You can view the Demo scene;
+but you will notice how simple the dialog narrator is :)
+
+---------------------------------
+
+HOW TO USE "Simple Dialog Narrator"
+
+step 1:  add "SimpleDialogCall.cs" script located in the main folder to ANY gameObject.
+
+step 2: customise your dialog as you see fit :)
+
+step 3: play the scene... simple!
+
+----------------
+
+P.S.> all values in the "Optional Properties" tab will use the prefab's default unless change is specified.
+e.g. 
+      Font size 0 -> uses prefab's font size
+      Font blank -> uses prefab's assigned font
+      Font color all value 0 -> uses prefab's font color
+         IMPORTANT -> when changing font color, Don't forget to adjust the 'ALPHA' value as well!
+
+
+
+
+Further Customisation
+==========================
+
+1) You can change the way the dialog looks like by changing the default prefab located in "Simple Dialog Narrator/Resources/DialogPrefab"
+
+P.S.> please change the GUIs. Add more stuff to the prefab as you wish BUT DO NOT alter the name of the provided gameObjects.
+the script relies on the 'exact' name of the gameObjects defined to work correctly.
+
+----------------
+
+
+2) You can opt to provide a dialog prefab in the inspector properties of SimpleDialogCall.cs. Under the "Optional properties -> Dialog properties -> prefab"
+
+This will allow you to define more than one dialog GUI style as appose to using the default all the time.
+P.S.> as per above, please leave the names of the gameObjects intact within a dialog prefab.
+
+----------------
+
+3) Feel free to add / modify the available script to meet your custom needs.
+However, please keep track of the changes made to make it easier for your to merge with future updates. TQ 

@@ -1,0 +1,34 @@
+IF YOU ENCOUNTER ERRORS
+========================
+
+Help help !! Simple Dialog Narrator is NOT working / showing !!!
+calm down...
+
+try the following first :-
+
+------------------
+
+1) Is your camera set to "Orthographic" mode? SDN only works in "Orthographic".
+Perspective view is not supported.
+
+------------------
+
+2) Perhaps your camera scale is too small. The default font size may be too big.
+
+Go to the font size property "SimpleDialogCall.cs inspector property -> a dialog ->
+                              Optional Properties -> Header font size & Text Font size"
+
+set the font size to about 1~5 and then work your way up. If your font is blurry, suggest editing
+the dialog prefab's font gameObject's localScale to about x = y = z = 0.02f... then increase the font size as necessary.
+
+
+
+------------------
+still cannot?
+Contact me :)
+
+
+email :- kurastudios@gmail.com
+facebook :- https://www.facebook.com/KuraStudios
+Unity forum :- http://goo.gl/Q5Dv8W
+Unity forum PM :- kurayami88
