@@ -6,6 +6,7 @@ public class Boy : MonoBehaviour {
 	public GameObject cama;
 	public GameObject camaConNinyo;
 	public string comportamientoNiño;
+	public bool esBueno;
 	// Use this for initialization
 	void Start () {
 	
@@ -23,6 +24,7 @@ public class Boy : MonoBehaviour {
 		GameObject nuevaCama  = Instantiate(camaConNinyo,cama.transform.position,camaConNinyo.transform.rotation) as GameObject;
 		UnityEngine.UI.Text textComportamientoNiño = nuevaCama.GetComponentsInChildren<UnityEngine.UI.Text>(true)[0];
 		textComportamientoNiño.text = comportamientoNiño;
+		nuevaCama.GetComponent<CamaConNinyo>().EsBueno = esBueno;
 		Destroy (cama);
 		/// Instanciar la cama-con-niño
 

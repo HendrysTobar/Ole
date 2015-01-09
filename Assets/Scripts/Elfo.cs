@@ -40,41 +40,66 @@ public class Elfo : MonoBehaviour {
 
 	public void LanzarSombrilla(bool negra)
 	{
-		Object sombrilla;
+		GameObject sombrilla;
+
+		#region Codigo Eduardo
 		//Si es negra
 		if (negra == true) 
 		{
 			//Entonces poner sombrilla negra
-			sombrilla = Instantiate(sombrillaNegra,polvosMagicos.transform.position, sombrillaNegra.transform.rotation);
-
-
+			sombrilla = Instantiate(sombrillaNegra,polvosMagicos.transform.position, sombrillaNegra.transform.rotation) as GameObject;
 		}
 		//Sino
 		else
 		{
 			///Enonces poner Sombrilla blanca
-			sombrilla = Instantiate(sombrillaBlanca,polvosMagicos.transform.position, sombrillaBlanca.transform.rotation); 
+			sombrilla = Instantiate(sombrillaBlanca,polvosMagicos.transform.position, sombrillaBlanca.transform.rotation) as GameObject; 
+		}
+		#endregion
+		#region Codigo Hendrys
+		//Si no esta tocando la cama
+		if(!isTouchingBed)
+			//La sombrilla se destruira en un segundo
+			Destroy(sombrilla, 1.0f);
+		//De otro modo...
+		else
+		{
+			//Poner la sombrilla en el gancho de la cama
+			CamaConNinyo camaConNinyoObjeto  =  camaConNinyo.GetComponent<CamaConNinyo>();
+			Transform gancho = camaConNinyoObjeto.gancho;
+			if(negra)
+				camaConNinyoObjeto.sombrillaAsignada = CamaConNinyo.EstadoSombrilla.Negra;
+			else
+				camaConNinyoObjeto.sombrillaAsignada = CamaConNinyo.EstadoSombrilla.Blanca;
+
+			sombrilla.transform.position = gancho.transform.position;
+			//Si el gancho ya tiene hijos..
+			if(gancho.childCount > 0)
+			{
+				//Destruir su hijo
+				Destroy(gancho.GetChild(0).gameObject);
+			}
+			sombrilla.transform.parent = gancho;
+
+
+			//Llamar al verificador pues se ha colocado una somrbilla
+
 
 		}
-		Destroy(sombrilla, 1.0f);
+		#endregion
+
+
 
 		//Reproducir Sonido de Chispas
 		audio.PlayOneShot(shimmer);
 		
-		/*if(isTouchingBoy)
-		{
-			//Poner a dormir al niño ;)
-			
-			Boy b = ninyo.GetComponent<Boy>();
-			b.Dormirse();
-			
-			
-		}*/
 
 
 	}
 	bool isTouchingBoy = false;
+	bool isTouchingBed = false;
 	private GameObject ninyo;
+	private GameObject camaConNinyo;
 	void OnTriggerEnter(Collider c)
 	{
 		if(c.collider.CompareTag("Ninyo"))
@@ -82,12 +107,28 @@ public class Elfo : MonoBehaviour {
 			isTouchingBoy = true;
 			ninyo = c.transform.parent.gameObject;
 		}
+
+		if(c.gameObject.CompareTag("CamaConNinyo"))
+		{
+			isTouchingBed = true;
+			camaConNinyo = c.transform.parent.gameObject;
+		}
 	}
 
 	void OnTriggerExit(Collider c)
 	{
-		isTouchingBoy = false;
-		ninyo = null;
+		if(c.collider.CompareTag("Ninyo"))
+		{
+			isTouchingBoy = false;
+			ninyo = null;
+		}
+		if(c.gameObject.CompareTag("CamaConNinyo"))
+		{
+			isTouchingBed = false;
+			camaConNinyo = null;
+		}
+		
+
 	}
 
 
