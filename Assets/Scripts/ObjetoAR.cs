@@ -7,10 +7,13 @@ public class ObjetoAR : MonoBehaviour {
 	public string nombre;
 	public GameObject textComponent;
 	private AudioSource[] audios;
+
+	private GameObject camara;
 	// Use this for initialization
 	void Start () 
 	{
 		audios = GetComponents<AudioSource>();
+		camara = GameObject.Find ("ARCamera");
 	}
 
 	// Update is called once per frame
@@ -34,7 +37,7 @@ public class ObjetoAR : MonoBehaviour {
 		Touch t = Input.GetTouch(0);
 		if(t.phase == TouchPhase.Began)
 		{
-			Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+			Ray ray = camara.camera.ScreenPointToRay(Input.GetTouch(0).position);
 			RaycastHit hitInfo;
 			//Si el rayo golpea algo
 			if(Physics.Raycast(ray, out hitInfo))

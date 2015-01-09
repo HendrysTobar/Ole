@@ -12,6 +12,7 @@ public class MovimientoPersonaje : MonoBehaviour
 	CharacterController cc;
 	Plane groundPlane;
 	Vector3 destination;
+	GameObject camara;
 
 	EventSystem eventSystem;
 
@@ -29,6 +30,7 @@ public class MovimientoPersonaje : MonoBehaviour
 		destination = transform.position;
 
 		eventSystem = GameObject.Find ("EventSystem").GetComponent<EventSystem>();
+		camara = GameObject.Find ("ARCamera");
 
 	
 	}
@@ -78,7 +80,7 @@ public class MovimientoPersonaje : MonoBehaviour
 		}
 
 
-		Ray ray = Camera.main.ScreenPointToRay(xy);
+		Ray ray = camara.camera.ScreenPointToRay(xy);
 		float rayDistance;
 		if (groundPlane.Raycast(ray, out rayDistance))
 		{

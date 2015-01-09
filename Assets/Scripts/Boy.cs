@@ -22,6 +22,7 @@ public class Boy : MonoBehaviour {
 		//cambiar la cama a cama-con-niño
 		/// Destruir la cama vieja
 		GameObject nuevaCama  = Instantiate(camaConNinyo,cama.transform.position,camaConNinyo.transform.rotation) as GameObject;
+		nuevaCama.transform.parent = transform.parent;
 		UnityEngine.UI.Text textComportamientoNiño = nuevaCama.GetComponentsInChildren<UnityEngine.UI.Text>(true)[0];
 		textComportamientoNiño.text = comportamientoNiño;
 		nuevaCama.GetComponent<CamaConNinyo>().EsBueno = esBueno;

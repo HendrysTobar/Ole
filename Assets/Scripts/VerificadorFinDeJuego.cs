@@ -65,7 +65,7 @@ public class VerificadorFinDeJuego : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () 
+	void Awake () 
 	{
 		escena = FindObjectOfType<Escena>();
 

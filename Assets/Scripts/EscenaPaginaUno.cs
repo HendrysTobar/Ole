@@ -7,6 +7,7 @@ public class EscenaPaginaUno : Escena {
 	public GameObject canvas;
 	public VerificadorFinDeJuego verificador;
 
+
 	public SimpleDialogCall dialogoGanaste;
 	public SimpleDialogCall dialogoIntenta;
 
@@ -22,8 +23,7 @@ public class EscenaPaginaUno : Escena {
 
 	public void PonerCamaraPerspectiva(){
 		Camera.main.orthographic = false;
-		imageTarget.SetActive(true);
-		canvas.SetActive (true);
+
 
 
 
@@ -42,7 +42,8 @@ public class EscenaPaginaUno : Escena {
 	}
 	public void Activar()
 	{
-		PonerCamaraPerspectiva();
+		imageTarget.SetActive(true);
+		canvas.SetActive (true);
 	}
 
 	public void ActivarYRecalcular()
