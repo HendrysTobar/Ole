@@ -64,25 +64,43 @@ public class Elfo : MonoBehaviour {
 		//De otro modo...
 		else
 		{
+
 			//Poner la sombrilla en el gancho de la cama
 			CamaConNinyo camaConNinyoObjeto  =  camaConNinyo.GetComponent<CamaConNinyo>();
 			Transform gancho = camaConNinyoObjeto.gancho;
+			//Si el gancho ya tiene hijos..
+			if(gancho.childCount > 0)
+			{
+				//Destruir su hijo
+				Destroy(gancho.GetChild(0).gameObject);
+				VerificadorFinDeJuego.DecrementarItemsAsignados();
+				if(camaConNinyoObjeto.EstaCorrectamenteAsignado)
+					VerificadorFinDeJuego.DecrementarItemsCorrectos();
+			}
+
 			if(negra)
 				camaConNinyoObjeto.sombrillaAsignada = CamaConNinyo.EstadoSombrilla.Negra;
 			else
 				camaConNinyoObjeto.sombrillaAsignada = CamaConNinyo.EstadoSombrilla.Blanca;
 
 			sombrilla.transform.position = gancho.transform.position;
-			//Si el gancho ya tiene hijos..
-			if(gancho.childCount > 0)
-			{
-				//Destruir su hijo
-				Destroy(gancho.GetChild(0).gameObject);
-			}
+
 			sombrilla.transform.parent = gancho;
 
-
 			//Llamar al verificador pues se ha colocado una somrbilla
+			//Una vez se ha puesto la sombrilla, se verifica si se ha asignado correctamente
+			if(camaConNinyoObjeto.sombrillaAsignada == CamaConNinyo.EstadoSombrilla.Negra && !camaConNinyoObjeto.EsBueno
+			   ||
+			   camaConNinyoObjeto.sombrillaAsignada == CamaConNinyo.EstadoSombrilla.Blanca && camaConNinyoObjeto.EsBueno)
+			{
+				VerificadorFinDeJuego.IncrementarItemsCorrectos();
+			}
+			VerificadorFinDeJuego.IncrementarItemsAsignados();
+
+
+
+
+
 
 
 		}
@@ -92,7 +110,7 @@ public class Elfo : MonoBehaviour {
 
 		//Reproducir Sonido de Chispas
 		audio.PlayOneShot(shimmer);
-		
+		//VerificadorFinDeJuego.Log();
 
 
 	}

@@ -26,4 +26,12 @@ public class CamaConNinyo : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	public bool EstaCorrectamenteAsignado
+	{
+		get
+		{
+			return ((sombrillaAsignada == EstadoSombrilla.Blanca && esBueno) || (sombrillaAsignada == EstadoSombrilla.Negra && !esBueno));
+		}
+	}
 }
