@@ -3,6 +3,8 @@ using System.Collections;
 
 public class VerificadorFinDeJuego : MonoBehaviour {
 
+
+
 	/// <summary>
 	/// El total del Items que este verificador cuenta.
 	/// </summary>
@@ -58,10 +60,15 @@ public class VerificadorFinDeJuego : MonoBehaviour {
 		}
 	}
 
+	public static Escena escena;
+
+
 
 	// Use this for initialization
 	void Start () 
 	{
+		escena = FindObjectOfType<Escena>();
+
 		Reset();
 		CalcularTotalItems();
 	}
@@ -70,7 +77,7 @@ public class VerificadorFinDeJuego : MonoBehaviour {
 	/// <summary>
 	/// Calcula the total items.
 	/// </summary>
-	void CalcularTotalItems ()
+	public void CalcularTotalItems ()
 	{
 		if(string.IsNullOrEmpty(tagCount))
 		{
@@ -94,11 +101,13 @@ public class VerificadorFinDeJuego : MonoBehaviour {
 			if(totalItems == totalItemsCorrectos)
 			{
 				//Ganaste!!
+				escena.TerminarEscena(true);
 				Debug.Log("Ganaste");
 			}
 			else
 			{
 				//Perdiste
+				escena.TerminarEscena(false);
 				Debug.Log("Hay errores. Prueba de nuevo");
 			}
 
@@ -130,7 +139,7 @@ public class VerificadorFinDeJuego : MonoBehaviour {
 		totalItemsCorrectos--;
 	}
 
-	private static void Reset()
+	public static void Reset()
 	{
 		totalItems = 0;
 		totalItemsAsignados = 0;

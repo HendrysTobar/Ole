@@ -110,7 +110,7 @@ public class Elfo : MonoBehaviour {
 
 		//Reproducir Sonido de Chispas
 		audio.PlayOneShot(shimmer);
-		//VerificadorFinDeJuego.Log();
+		VerificadorFinDeJuego.Log();
 
 
 	}
