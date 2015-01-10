@@ -48,7 +48,7 @@ public class EscenaPaginaUno : Escena {
 
 	public void ActivarYRecalcular()
 	{
-		PonerCamaraPerspectiva();
+		Activar();
 		RecalcularVerificador();
 
 	}

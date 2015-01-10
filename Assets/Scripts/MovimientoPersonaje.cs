@@ -63,14 +63,11 @@ public class MovimientoPersonaje : MonoBehaviour
 	{
 
 		Vector3 xy = Vector3.zero;
-		if (Input.GetMouseButtonDown(0))
+		if(Input.touchCount > 0)
 		{
-			xy = Input.mousePosition;
-		}
-		else
-		{
-			if(Input.touchCount > 0)
+			if(Input.GetTouch(0).phase == TouchPhase.Ended)
 			{
+				Debug.Log("Se ha soltado el touch");
 				xy = Input.GetTouch(0).position;
 			}
 			else
@@ -78,8 +75,20 @@ public class MovimientoPersonaje : MonoBehaviour
 				return Vector3.zero;
 			}
 		}
+		else
+		{
+			if (Input.GetMouseButtonDown(0))
+			{
+				Debug.Log("Se ha presionado el Mouse");
+				xy = Input.mousePosition;
+			}
+			else
+			{
+				return Vector3.zero;
+			}
+		}
 
-
+		Debug.Log(xy.ToString());
 		Ray ray = camara.camera.ScreenPointToRay(xy);
 		float rayDistance;
 		if (groundPlane.Raycast(ray, out rayDistance))

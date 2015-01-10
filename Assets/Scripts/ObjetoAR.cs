@@ -19,13 +19,13 @@ public class ObjetoAR : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-#if UNITY_ANDROID
+
 		if(Touched())
 
 		{
 			OnMouseDown();
 		}
-#endif
+
 	}
 
 
@@ -35,7 +35,7 @@ public class ObjetoAR : MonoBehaviour {
 			return false;
 
 		Touch t = Input.GetTouch(0);
-		if(t.phase == TouchPhase.Began)
+		if(t.phase == TouchPhase.Ended)
 		{
 			Ray ray = camara.camera.ScreenPointToRay(Input.GetTouch(0).position);
 			RaycastHit hitInfo;
@@ -80,7 +80,7 @@ public class ObjetoAR : MonoBehaviour {
 	void PlaySound (bool a)
 	{
 
-		audios[textComponent.activeSelf?1:0].Play();
+		audios[a?1:0].Play();
 
 
 	}
