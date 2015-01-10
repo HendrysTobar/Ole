@@ -40,7 +40,9 @@ public class MovimientoPersonaje : MonoBehaviour
 	void LateUpdate () {
 
 		//Si no se esta dando click en un objeto de la GUI
-		if(eventSystem.currentSelectedGameObject == null)
+		//y
+		//El touch Helper no ha tocado algo
+		if(eventSystem.currentSelectedGameObject == null && !TouchHelper.HaTocadoAlgo)
 		{
 			//Capturamos la posicion deseada por el usuario
 			Vector3 d = Capture3DClickPosition();

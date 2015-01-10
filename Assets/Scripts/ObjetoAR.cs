@@ -8,12 +8,12 @@ public class ObjetoAR : MonoBehaviour {
 	public GameObject textComponent;
 	private AudioSource[] audios;
 
-	private GameObject camara;
+
 	// Use this for initialization
 	void Start () 
 	{
 		audios = GetComponents<AudioSource>();
-		camara = GameObject.Find ("ARCamera");
+
 	}
 
 	// Update is called once per frame
@@ -23,7 +23,7 @@ public class ObjetoAR : MonoBehaviour {
 		if(Touched())
 
 		{
-			OnMouseDown();
+			ToggleName();
 		}
 
 	}
@@ -31,6 +31,7 @@ public class ObjetoAR : MonoBehaviour {
 
 	bool Touched ()
 	{
+		/*
 		if(Input.touchCount == 0)
 			return false;
 
@@ -56,12 +57,19 @@ public class ObjetoAR : MonoBehaviour {
 			
 		}
 		return false;
+		*/
+		return TouchHelper.ObjetoTocado == this.gameObject || TouchHelper.ObjetoTocado == this.transform.parent.gameObject;
 	}
 
 
 	void OnMouseDown()
 	{
-
+		//Machetico para saber si ya se ha tocado con el Touch
+		if(Input.touchCount > 0)
+		{
+			//Se ha usado el Touch, entonces no haga nada
+			return;
+		}
 		ToggleName();
 
 	}
@@ -69,10 +77,12 @@ public class ObjetoAR : MonoBehaviour {
 
 	public void ToggleName ()
 	{
-
+		Debug.Log("Toggling Name");
 		textComponent.SetActive(!textComponent.activeSelf);
 
 		PlaySound(textComponent.activeSelf);
+
+
 
 	}
 	
