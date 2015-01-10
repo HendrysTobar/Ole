@@ -13,6 +13,7 @@ public class MovimientoPersonaje : MonoBehaviour
 	Plane groundPlane;
 	Vector3 destination;
 	GameObject camara;
+	public Collider triggerWorldBounds;
 
 	EventSystem eventSystem;
 
@@ -41,8 +42,12 @@ public class MovimientoPersonaje : MonoBehaviour
 		//Si no se esta dando click en un objeto de la GUI
 		if(eventSystem.currentSelectedGameObject == null)
 		{
+			//Capturamos la posicion deseada por el usuario
 			Vector3 d = Capture3DClickPosition();
-			if(d != Vector3.zero)
+			//Si esa posicion es distinta de cero (es decir, que se ha detectado una entrada del usuario)
+			//y
+			//Esa posicio esta dentro del mundo
+			if(d != Vector3.zero && triggerWorldBounds.bounds.Contains(d) )
 			{
 				destination = d;
 				PlaceFlare(d);
@@ -51,6 +56,8 @@ public class MovimientoPersonaje : MonoBehaviour
 		}
 
 		Vector3 vel = destination - transform.position;
+
+
 
 		if(move)
 			cc.SimpleMove(speed * vel.normalized * Time.deltaTime);
@@ -137,5 +144,8 @@ public class MovimientoPersonaje : MonoBehaviour
 		if(!c.collider.CompareTag("World") && !c.collider.CompareTag("Player"))
 			move = false;
 	}
+
+
+
 }
 
