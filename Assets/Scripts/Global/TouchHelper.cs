@@ -26,7 +26,12 @@ public class TouchHelper : MonoBehaviour {
 	void Start()
 	{
 		if(camara == null)
-			Debug.LogError("No se ha especificado una camara para el Touch Helper");
+		{
+			camara = GameObject.Find("ARCamera");
+			if(camara == null)
+				Debug.LogError("No se ha especificado una camara para el Touch Helper");
+		}
+
 	}
 	
 	// Update is called once per frame
