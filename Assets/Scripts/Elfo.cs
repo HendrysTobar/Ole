@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Elfo : MonoBehaviour {
 
@@ -7,6 +8,10 @@ public class Elfo : MonoBehaviour {
 	public GameObject sombrillaNegra;
 	public GameObject sombrillaBlanca;
 	public AudioClip shimmer;
+
+
+
+
 	// Use this for initialization
 	void Start () {
 
@@ -19,6 +24,7 @@ public class Elfo : MonoBehaviour {
 			
 	}
 
+	#region Metodos del Elfo
 	public void LanzarPolvosMagicos()
 	{
 		//Instanciar Polvos Magicos
@@ -114,10 +120,59 @@ public class Elfo : MonoBehaviour {
 
 
 	}
+
+	public void UsarManoMagica()
+	{
+		//Si no esta tocando maceta
+		if(maceta == null)
+			//no hace nada
+			return;
+
+		//Si esta tocando maceta
+
+
+	}
+
+	void AccionarObjetoTocable()
+	{
+		//Esta validacion es necesaria porque si por alguna razon no hay objeto tocabl
+		//no se puede continuar
+		if(objetoTocable == null)
+		{
+			Debug.LogWarning("No hay objeto tocable al cual aplicar esta accion");
+			return;
+		}
+		//.. De lo contrario
+		else
+		{
+			objetoTocable.Accionar();
+		}
+
+
+
+	}
+
+	public void UsarManoMagicaTutorial()
+	{
+		AccionarObjetoTocable();
+		//Reproducir Sonido de Chispas
+		audio.PlayOneShot(shimmer);
+	}
+
+
+	#endregion
+
+
 	bool isTouchingBoy = false;
 	bool isTouchingBed = false;
+	bool isTouchingMaceta = false;
+	bool isTouchingSomething = false;
 	private GameObject ninyo;
 	private GameObject camaConNinyo;
+	private GameObject maceta;
+
+	private GameObject something;
+	Tocable objetoTocable;
 	void OnTriggerEnter(Collider c)
 	{
 		if(c.collider.CompareTag("Ninyo"))
@@ -131,6 +186,27 @@ public class Elfo : MonoBehaviour {
 			isTouchingBed = true;
 			camaConNinyo = c.transform.parent.gameObject;
 		}
+		if(c.gameObject.CompareTag("Maceta"))
+		{
+			isTouchingMaceta = true;
+			maceta = c.transform.parent.gameObject;
+		}
+		///Genralizacion del proceso de identificar un objeto que se puede tocar
+		if(c.gameObject.CompareTag("Tocable"))
+		{
+			isTouchingSomething = true;
+			something = c.transform.parent.gameObject;
+			objetoTocable = something.GetComponent<Tocable>();
+			if(objetoTocable == null)
+			{
+				Debug.LogWarning("El obeto tocable no contiene un script Tocable");
+			}
+			else
+			{
+				objetoTocable.IsBeingTouched = true;
+			}
+		}
+
 	}
 
 	void OnTriggerExit(Collider c)
@@ -142,9 +218,10 @@ public class Elfo : MonoBehaviour {
 		}
 		if(c.gameObject.CompareTag("CamaConNinyo"))
 		{
-			isTouchingBed = false;
-			camaConNinyo = null;
+			isTouchingMaceta = false;
+			maceta = null;
 		}
+
 		
 
 	}

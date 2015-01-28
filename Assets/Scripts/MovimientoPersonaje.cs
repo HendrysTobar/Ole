@@ -14,6 +14,24 @@ public class MovimientoPersonaje : MonoBehaviour
 	Vector3 destination;
 	GameObject camara;
 	public Collider triggerWorldBounds;
+	public bool activo = true;
+
+	public bool Activo {
+		get {
+			return activo;
+		}
+		set {
+			activo = value;
+		}
+	}
+
+	#region Eventos
+	public event System.Action OnDirectionChanged;
+	#endregion
+
+
+
+
 
 	EventSystem eventSystem;
 
@@ -42,7 +60,7 @@ public class MovimientoPersonaje : MonoBehaviour
 		//Si no se esta dando click en un objeto de la GUI
 		//y
 		//El touch Helper no ha tocado algo
-		if(eventSystem.currentSelectedGameObject == null && !TouchHelper.HaTocadoAlgo)
+		if(eventSystem.currentSelectedGameObject == null && !TouchHelper.HaTocadoAlgo && activo)
 		{
 			//Capturamos la posicion deseada por el usuario
 			Vector3 d = Capture3DClickPosition();
@@ -53,6 +71,8 @@ public class MovimientoPersonaje : MonoBehaviour
 			{
 				destination = d;
 				PlaceFlare(d);
+				if(OnDirectionChanged != null)
+					OnDirectionChanged();
 				move = true;
 			}
 		}
@@ -145,6 +165,15 @@ public class MovimientoPersonaje : MonoBehaviour
 	{
 		if(!c.collider.CompareTag("World") && !c.collider.CompareTag("Player"))
 			move = false;
+	}
+
+	public void ActivarMovimiento()
+	{
+		Activo = true;
+	}
+	public void DesactivarMovimiento()
+	{
+		Activo = false;
 	}
 
 
