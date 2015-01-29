@@ -9,7 +9,10 @@ public class Elfo : MonoBehaviour {
 	public GameObject sombrillaBlanca;
 	public AudioClip shimmer;
 
-
+	#region Eventos
+	public delegate void TocableAccionadoHandler(string tagObjeto);
+	public TocableAccionadoHandler OnObjetoAccionado;
+	#endregion
 
 
 	// Use this for initialization
@@ -129,6 +132,18 @@ public class Elfo : MonoBehaviour {
 			return;
 
 		//Si esta tocando maceta
+		Reemplazable r = maceta.GetComponent<Reemplazable>();
+		if(r!= null)
+			r.Reemplazar();
+		else
+			Debug.LogWarning("La maceta no tiene script 'Reemplazable'");
+
+		if(OnObjetoAccionado!= null)
+			OnObjetoAccionado(maceta.tag);
+
+		maceta = null;
+		isTouchingMaceta = false;
+
 
 
 	}

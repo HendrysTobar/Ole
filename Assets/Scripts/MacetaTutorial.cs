@@ -18,7 +18,7 @@ public class MacetaTutorial :Tocable {
 	}
 
 	#region implemented abstract members of Tocable
-	public override void Accionar ()
+	public override void Accionar (int accion)
 	{
 		/*Eliminar la maceta esta
 		 * Y poner la maceta con flores

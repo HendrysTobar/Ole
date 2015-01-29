@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+/// <summary>
+/// Esta clase representa los objetos que el elfo puede tocar
+/// </summary>
 public abstract class Tocable : MonoBehaviour {
 	private Transform flarePosition;
 
@@ -19,7 +23,8 @@ public abstract class Tocable : MonoBehaviour {
 
 	void SwitchFlare (bool isBeingTouched)
 	{
-		flarePosition.gameObject.SetActive(isBeingTouched);
+		if(flarePosition != null)
+			flarePosition.gameObject.SetActive(isBeingTouched);
 	}
 
 	private bool isBeingTouched;
@@ -44,7 +49,12 @@ public abstract class Tocable : MonoBehaviour {
 		}
 	}
 
-	public abstract void Accionar();
+
+	public void Accionar()
+	{
+		Accionar(1);
+	}
+	public abstract void Accionar(int accion);
 	public abstract void Touched();
 	public abstract void UnTouched();
 }
