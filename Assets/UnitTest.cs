@@ -30,7 +30,7 @@ public class UnitTest : MonoBehaviour {
 		*/
 		if(GUI.Button(new Rect(0,0,100,100), "Boton!"))
 		{
-			Debug.Log("Hola!");
+			BroadcastMessage("CambiarEscenario");
 		}
 
 	}
