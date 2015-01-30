@@ -5,6 +5,7 @@ using System;
 public class Elfo : MonoBehaviour {
 
 	public ParticleSystem polvosMagicos;
+	public ParticleSystem Gotas;
 	public GameObject sombrillaNegra;
 	public GameObject sombrillaBlanca;
 	public AudioClip shimmer;
@@ -41,9 +42,29 @@ public class Elfo : MonoBehaviour {
 
 			Boy b = ninyo.GetComponent<Boy>();
 			b.Dormirse();
-			isTouchingBoy = false;
+			isTouchingBoy = false;	
+
+		}
+		if(isTouchingSomething)
+		{
+			//accionar Objeto touchable ;
+			if(objetoTocable != null)
+				objetoTocable.Accionar(1);						
+		}
+	}
+	public void LanzarGotas()
+	{
+		//Instanciar Polvos Magicos
+		Gotas.Play();
+		//Reproducir Sonido de Chispas
+		audio.PlayOneShot(shimmer);
 		
 
+		if(isTouchingSomething)
+		{
+			//accionar Objeto touchable ;
+			if(objetoTocable != null)
+				objetoTocable.Accionar(2);						
 		}
 	}
 
