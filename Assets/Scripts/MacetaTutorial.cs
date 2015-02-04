@@ -7,7 +7,7 @@ public class MacetaTutorial :Tocable {
 	public GameObject manoGUI;
 	public GameObject macetaConFlores;
 	// Use this for initialization
-	void Start () {
+	new void Start () {
 		base.Start();
 	
 	}

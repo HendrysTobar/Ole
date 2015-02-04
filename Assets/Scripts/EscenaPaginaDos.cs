@@ -1,16 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EscenaPaginaDos : MonoBehaviour {
+public class EscenaPaginaDos : Escena {
 
-	private Elfo elfo;
-	public GameObject world;
+
+	public GameObject worldVisible;
+	public GameObject worldGrupo;
+	public GameObject arbolCenador;
 	private int numeroDeArboles = 0;
 	public SimpleDialogCall dialogoCambio;
+	public SimpleDialogCall dialogoExplicacionArbol;
+	public SimpleDialogCall dialogoGanaste;
+	public SimpleDialogCall dialogoIntenta;
+	public GameObject canvas1;
+	public GameObject canvas2;
+
+	public static EscenaPaginaDos instancia;
 	// Use this for initialization
 	void Start () 
 	{
-		elfo = FindObjectOfType<Elfo>();
+
 		if(elfo == null)
 		{
 			Debug.LogWarning("No se encuentra el objeto elfo en la escena");
@@ -18,6 +27,7 @@ public class EscenaPaginaDos : MonoBehaviour {
 		}
 
 		elfo.OnObjetoAccionado += ContarArboles;
+		instancia = this;
 	
 	}
 	
@@ -40,9 +50,15 @@ public class EscenaPaginaDos : MonoBehaviour {
 	void CambiarEscenario ()
 	{
 		//Desaparecer el mundo actual (reproducir la animacion, al final se destruye el objeto y al final se pone el cenador)
-		anim = world.GetComponent<Animator>();
+		anim = worldVisible.GetComponent<Animator>();
 		anim.Play(ANIM_NAME);
 		StartCoroutine("DesplegarDialogo");
+
+		ArbolSinHojas [] arboles = FindObjectsOfType<ArbolSinHojas>();
+		foreach(ArbolSinHojas a in arboles)
+		{
+			a.enabled = true;
+		}
 
 	}
 
@@ -57,6 +73,47 @@ public class EscenaPaginaDos : MonoBehaviour {
 		anim.speed = 0;
 	}
 
+	public void PonerArbol()
+	{
+		//worldGrupo.SetActive(false);
+		//arbolCenador.SetActive(true);
+		GameObject ac = Instantiate(arbolCenador, worldGrupo.transform.position, worldGrupo.transform.rotation) as GameObject;
+		ac.transform.parent = worldGrupo.transform.parent;
+		ac.transform.localScale = Vector3.one;
+
+		Destroy(worldGrupo);
+
+
+		canvas1.SetActive(false);
+		canvas2.SetActive(true);
+		dialogoExplicacionArbol.manualStart();
+	}
+
+	public void VerificarSlots()
+	{
+		VerificadorDeSlots vs = FindObjectOfType<VerificadorDeSlots>();
+		if(vs != null)
+			vs.Verificar();
+	}
+
+
+
+	#region implemented abstract members of Escena
+	public override void TerminarEscena (bool gano)
+	{
+
+		if(gano)
+		{
+			dialogoGanaste.manualStart();
+			canvas2.SetActive(false);
+		}
+		else
+		{
+			dialogoIntenta.manualStart();
+		}
+
+	}
+	#endregion
 
 
 }

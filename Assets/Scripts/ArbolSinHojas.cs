@@ -3,17 +3,22 @@ using System.Collections;
 
 public class ArbolSinHojas : Touchable 
 {
-	void Update()
+	new void Update()
 	{
-		if(Touched())
-		{
-			//Se ha tocado el arbol
-		}
+		base.Update();
 	}
 
-	void OnMouseDown()
+	new void OnMouseDown()
 	{
-		//Se ha tocado else arbol
+		if(this.enabled == true)
+			base.OnMouseDown();
 	}
 
+
+	#region implemented abstract members of Touchable
+	protected override void ManejarToque ()
+	{
+		EscenaPaginaDos.instancia.PonerArbol();
+	}
+	#endregion
 }
