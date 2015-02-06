@@ -2,7 +2,13 @@ fileFormatVersion: 2
 guid: 09b44e9bb6f37344099d6a6be991f0b1
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - polvosMagicos: {instanceID: 0}
+  - sombrillaNegra: {instanceID: 0}
+  - sombrillaBlanca: {instanceID: 0}
+  - purgante: {fileID: 173524, guid: 6bd91bb1e757d684394868dfc796c979, type: 2}
+  - gym: {instanceID: 0}
+  - shimmer: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

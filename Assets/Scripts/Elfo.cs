@@ -7,6 +7,8 @@ public class Elfo : MonoBehaviour {
 	public ParticleSystem polvosMagicos;
 	public GameObject sombrillaNegra;
 	public GameObject sombrillaBlanca;
+	public GameObject purgante;
+	public GameObject gym;
 	public AudioClip shimmer;
 
 	#region Eventos
@@ -172,6 +174,70 @@ public class Elfo : MonoBehaviour {
 		AccionarObjetoTocable();
 		//Reproducir Sonido de Chispas
 		audio.PlayOneShot(shimmer);
+	}
+
+	public void UsarPurgante()
+	{
+		DesplegarYAccionar(purgante, "LetraVictor", TipoVerificacion.incorrecto,1);
+	}
+
+
+	private enum TipoVerificacion{ignorar, correcto, incorrecto};
+	/// <summary>
+	/// Este es un metodo generico. Lo que hace es poner una copia del objeto <paramref name="icono"/>
+	/// Y acciona el objetoTocable con la <param name="accion">si lo hay y tiene el tag <paramref name="tagObjeto"/>
+	/// La variable <paramref name="v"/> sirve para saber si se reporta al verificador un punto correcto, incorrecto o si se ignora
+	/// </summary>
+	/// <param name="icono">El Objeto a poner de Icono en las manos del elfo. Es un prefab </param>
+	/// <param name="tagObjeto">El tag que debe tener el objeto a accionarse </param>
+	/// <param name="v">El tipo de verificacion que se debe enviar al verificador de fin de juego</param>
+	/// <param name="accion">La accion a invocar en elobjeto tocable. Opcional quiere decir que se llama la accion por defecto</param>
+	private void DesplegarYAccionar(GameObject icono,string tagObjeto, TipoVerificacion v, int accion = 0)
+	{
+		//Poner el icono del purgante
+		GameObject p = Instantiate(icono, polvosMagicos.transform.position, icono.transform.rotation) as GameObject;
+		p.transform.parent = this.transform;
+		p.transform.localScale = purgante.transform.localScale;
+		p.transform.localRotation = icono.transform.localRotation;
+		Destroy (p, 1.0f);
+		//Si esta tocando algo	
+		if(isTouchingSomething)
+		{
+			if(objetoTocable.CompareTag(tagObjeto))
+			{
+				if(accion == 0)
+					objetoTocable.Accionar();
+				else
+					objetoTocable.Accionar(accion);
+				if(v != TipoVerificacion.ignorar)
+				{
+					if(objetoTocable.estado != Tocable.EstadoTocable.SinAsignar)
+					{
+						VerificadorFinDeJuego.DecrementarItemsAsignados();
+						if(objetoTocable.estado == Tocable.EstadoTocable.Correcto)
+						{
+							VerificadorFinDeJuego.DecrementarItemsCorrectos();
+						}
+					}
+					if(v == TipoVerificacion.correcto)
+					{
+						objetoTocable.estado = Tocable.EstadoTocable.Correcto;
+						VerificadorFinDeJuego.IncrementarItemsCorrectos();
+					}
+					objetoTocable.estado = Tocable.EstadoTocable.Incorrecto;
+					VerificadorFinDeJuego.IncrementarItemsAsignados();
+				}
+
+			}
+			
+		}
+		
+		audio.PlayOneShot(shimmer);
+	}
+
+	public void PonerAHacerEjercicio()
+	{
+		DesplegarYAccionar(this.gym, "LetraVictor", TipoVerificacion.correcto,2);
 	}
 
 

@@ -7,6 +7,8 @@ using System.Collections;
 /// </summary>
 public abstract class Tocable : MonoBehaviour {
 	private Transform flarePosition;
+	public enum EstadoTocable{SinAsignar, Correcto, Incorrecto};
+	public EstadoTocable estado = EstadoTocable.SinAsignar;
 
 	// Use this for initialization
 	protected void Start () 
