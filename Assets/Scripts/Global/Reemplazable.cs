@@ -23,6 +23,7 @@ public class Reemplazable : MonoBehaviour {
 	{
 		GameObject i = Instantiate(reemplazo, this.transform.position, this.transform.rotation) as GameObject;
 		i.transform.parent = this.transform.parent;
+		i.SetActive (true);
 		Destroy(this.gameObject);
 	}
 }
