@@ -7,12 +7,15 @@ public class LetraVictor : Tocable
 	public GameObject globo;
 	public GameObject _default;
 
+	private string currentAnim = null;
+
 	void TemblarYGritar ()
 	{
 		globo.SetActive(true);
 		Animator anim = _default.GetComponent<Animator>();
 		anim.enabled = true;
-		anim.Play("Temblequeo");
+		currentAnim = "Temblequeo";
+		anim.Play(currentAnim);
 
 	}
 
@@ -21,7 +24,24 @@ public class LetraVictor : Tocable
 		globo.SetActive(false);
 		Animator anim = _default.GetComponent<Animator>();
 		anim.enabled = true;
-		anim.Play("Ejercicio");
+		currentAnim = "Ejercicio";
+		anim.Play(currentAnim);
+	}
+
+	void OnEnable()
+	{
+		Animator anim = _default.GetComponent<Animator>();
+		if(!string.IsNullOrEmpty(currentAnim))
+		{
+
+			anim.enabled = true;
+			anim.Play(currentAnim);
+
+		}
+		else
+		{
+			anim.enabled = false;
+		}
 	}
 
 	#region implemented abstract members of Tocable

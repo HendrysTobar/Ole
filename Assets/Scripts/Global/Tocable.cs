@@ -34,7 +34,7 @@ public abstract class Tocable : MonoBehaviour {
 	{
 		set
 		{
-			isBeingTouched = true;
+			isBeingTouched = value;
 			SwitchFlare(isBeingTouched);
 			if(isBeingTouched)
 			{

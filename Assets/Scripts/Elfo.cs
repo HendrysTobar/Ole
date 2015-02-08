@@ -347,6 +347,23 @@ public class Elfo : MonoBehaviour {
 			maceta = null;
 		}
 
+		if(c.gameObject.CompareTag("Maceta"))
+		{
+			isTouchingMaceta = false;
+			maceta = null;
+		}
+		///Genralizacion del proceso de identificar un objeto que se puede tocar
+		if(c.gameObject.CompareTag("Tocable"))
+		{
+			isTouchingSomething = false;
+			something = null;
+			objetoTocable.IsBeingTouched = false;
+			objetoTocable = null;
+
+
+		}
+
+
 		
 
 	}
