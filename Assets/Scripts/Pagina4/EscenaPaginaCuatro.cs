@@ -12,6 +12,14 @@ public class EscenaPaginaCuatro : Escena {
 		instancia = this;
 	}
 
+	public void Exit()
+	{
+#if UNITY_EDITOR
+		UnityEditor.EditorApplication.isPlaying = false;
+#endif
+		Application.Quit();
+	}
+
 
 
 	public override void TerminarEscena (bool gano)
