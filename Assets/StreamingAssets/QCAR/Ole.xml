@@ -5,6 +5,6 @@
     <ImageTarget name="Portada" size="200.000000 277.734375" />
     <ImageTarget name="Pagina2" size="200.000000 290.702942" />
     <ImageTarget name="Pagina3" size="200.000000 324.218750" />
-    <ImageTarget name="Pagina4" size="200.000000 286.718750" />
+    <ImageTarget name="Pagina4" size="200.000000 200.000000" />
   </Tracking>
 </QCARConfig>
