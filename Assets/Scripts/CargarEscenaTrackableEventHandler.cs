@@ -45,6 +45,7 @@ public class CargarEscenaTrackableEventHandler : MonoBehaviour, ITrackableEventH
 
 	IEnumerator CargarEscena ()
 	{
+		SDialogManager.skipAllCurrentDialogs();
 		Debug.Log("Cargando escena " + this.name );
 		textoCargando.gameObject.SetActive(true);
 		yield return new WaitForEndOfFrame();

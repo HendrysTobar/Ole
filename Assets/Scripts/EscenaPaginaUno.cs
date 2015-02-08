@@ -6,12 +6,32 @@ public class EscenaPaginaUno : Escena {
 	public SimpleDialogCall dialogoGanaste;
 	public SimpleDialogCall dialogoIntenta;
 
+	//TODO: Esto deberia aceptar cualquier cantidad de niños
+	//Pero por el momento toca machete
+	private int NIÑOS_POR_DORMIR = 2;
+	private int niñosDormidos;
+
 	// Use this for initialization
 	void Start () {
 		Camera.main.orthographic = true;
 	}
-	
 
+	void PonerDialogoExplicativo ()
+	{
+
+	}
+	
+	public void NiñoDormido(string tagObjeto)
+	{
+		if(tagObjeto == "Ninyo")
+		{
+			niñosDormidos++;
+			if(niñosDormidos >= NIÑOS_POR_DORMIR)
+			{
+				PonerDialogoExplicativo();
+			}
+		}
+	}
 
 
 	public override void TerminarEscena(bool gano)
@@ -61,11 +81,16 @@ public abstract class Escena: MonoBehaviour
 	}
 	public void Activar()
 	{
-		imageTarget.SetActive(true);
+		ActivarSinCanvas();
 		canvas.SetActive (true);
+
+	}
+
+	public void ActivarSinCanvas()
+	{
+		imageTarget.SetActive(true);
 		if(elfo != null)
 			elfo.GetComponent<MovimientoPersonaje>().ActivarMovimiento();
-
 	}
 	
 	public void ActivarYRecalcular()

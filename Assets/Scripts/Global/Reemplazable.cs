@@ -26,4 +26,12 @@ public class Reemplazable : MonoBehaviour {
 		i.SetActive (true);
 		Destroy(this.gameObject);
 	}
+
+	public void ReemplazarSinRotacion()
+	{
+		GameObject i = Instantiate(reemplazo, this.transform.position, reemplazo.transform.rotation) as GameObject;
+		i.transform.parent = this.transform.parent;
+		i.SetActive (true);
+		Destroy(this.gameObject);
+	}
 }

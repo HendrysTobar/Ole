@@ -50,8 +50,8 @@ public class EscenaPaginaDos : Escena {
 	void CambiarEscenario ()
 	{
 		//Desaparecer el mundo actual (reproducir la animacion, al final se destruye el objeto y al final se pone el cenador)
-		anim = worldVisible.GetComponent<Animator>();
-		anim.Play(ANIM_NAME);
+//		anim = worldVisible.GetComponent<Animator>();
+//		anim.Play(ANIM_NAME);
 		StartCoroutine("DesplegarDialogo");
 
 		ArbolSinHojas [] arboles = FindObjectsOfType<ArbolSinHojas>();
@@ -65,10 +65,7 @@ public class EscenaPaginaDos : Escena {
 	IEnumerator DesplegarDialogo()
 	{
 		yield return new WaitForSeconds(0.3f);
-		while(anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
-		{
-			yield return null;
-		}
+
 		dialogoCambio.manualStart();
 		anim.speed = 0;
 	}

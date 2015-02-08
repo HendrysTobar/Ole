@@ -24,7 +24,7 @@ public class Furniture : Tocable {
 	{
 		Reemplazable r;
 		r=GetComponent<Reemplazable> ();
-		r.Reemplazar ();
+		r.ReemplazarSinRotacion();
 	}
 	void ZetasOff()
 	{

@@ -31,6 +31,39 @@ public class Elfo : MonoBehaviour {
 	}
 
 	#region Metodos del Elfo
+
+	void UsarVerificador (TipoVerificacion v)
+	{
+		if(objetoTocable == null)
+			return;
+		//Si esta verificacion es la misma que el objeto ya tiene...
+		bool esElMismo = objetoTocable.estado == Tocable.EstadoTocable.Correcto && v== TipoVerificacion.correcto ||
+			objetoTocable.estado == Tocable.EstadoTocable.Incorrecto && v == TipoVerificacion.incorrecto;
+		if(!esElMismo)
+		{
+
+			if(v != TipoVerificacion.ignorar)
+			{
+				if(objetoTocable.estado != Tocable.EstadoTocable.SinAsignar)
+				{
+					VerificadorFinDeJuego.DecrementarItemsAsignados();
+					if(objetoTocable.estado == Tocable.EstadoTocable.Correcto)
+					{
+						VerificadorFinDeJuego.DecrementarItemsCorrectos();
+					}
+				}
+				if(v == TipoVerificacion.correcto)
+				{
+					objetoTocable.estado = Tocable.EstadoTocable.Correcto;
+					VerificadorFinDeJuego.IncrementarItemsCorrectos();
+				}
+				objetoTocable.estado = Tocable.EstadoTocable.Incorrecto;
+				VerificadorFinDeJuego.IncrementarItemsAsignados();
+			}
+		}
+	}
+
+
 	public void LanzarPolvosMagicos()
 	{
 		//Instanciar Polvos Magicos
@@ -66,7 +99,9 @@ public class Elfo : MonoBehaviour {
 		{
 			//accionar Objeto touchable ;
 			if(objetoTocable != null)
-				objetoTocable.Accionar(2);						
+				objetoTocable.Accionar(2);	
+
+			UsarVerificador(TipoVerificacion.correcto);
 		}
 	}
 
@@ -99,40 +134,45 @@ public class Elfo : MonoBehaviour {
 
 			//Poner la sombrilla en el gancho de la cama
 			CamaConNinyo camaConNinyoObjeto  =  camaConNinyo.GetComponent<CamaConNinyo>();
-			Transform gancho = camaConNinyoObjeto.gancho;
-			//Si el gancho ya tiene hijos..
-			if(gancho.childCount > 0)
+
+			//si es la misma sombrilla que ya esta puesta
+			bool mismaSombrilla = camaConNinyoObjeto.sombrillaAsignada == CamaConNinyo.EstadoSombrilla.Negra && negra == true ||
+				camaConNinyoObjeto.sombrillaAsignada == CamaConNinyo.EstadoSombrilla.Blanca && negra == false;
+			if(mismaSombrilla)
+				Destroy(sombrilla);
+			if(!mismaSombrilla)
 			{
-				//Destruir su hijo
-				Destroy(gancho.GetChild(0).gameObject);
-				VerificadorFinDeJuego.DecrementarItemsAsignados();
-				if(camaConNinyoObjeto.EstaCorrectamenteAsignado)
-					VerificadorFinDeJuego.DecrementarItemsCorrectos();
+				Transform gancho = camaConNinyoObjeto.gancho;
+				//Si el gancho ya tiene hijos..
+				if(gancho.childCount > 0)
+				{
+					//Destruir su hijo
+					Destroy(gancho.GetChild(0).gameObject);
+					VerificadorFinDeJuego.DecrementarItemsAsignados();
+					if(camaConNinyoObjeto.EstaCorrectamenteAsignado)
+						VerificadorFinDeJuego.DecrementarItemsCorrectos();
+				}
+
+				if(negra)
+					camaConNinyoObjeto.sombrillaAsignada = CamaConNinyo.EstadoSombrilla.Negra;
+				else
+					camaConNinyoObjeto.sombrillaAsignada = CamaConNinyo.EstadoSombrilla.Blanca;
+
+				sombrilla.transform.position = gancho.transform.position;
+
+				sombrilla.transform.parent = gancho;
+
+				//Llamar al verificador pues se ha colocado una somrbilla
+				//Una vez se ha puesto la sombrilla, se verifica si se ha asignado correctamente
+				if(camaConNinyoObjeto.sombrillaAsignada == CamaConNinyo.EstadoSombrilla.Negra && !camaConNinyoObjeto.EsBueno
+				   ||
+				   camaConNinyoObjeto.sombrillaAsignada == CamaConNinyo.EstadoSombrilla.Blanca && camaConNinyoObjeto.EsBueno)
+				{
+					VerificadorFinDeJuego.IncrementarItemsCorrectos();
+				}
+				VerificadorFinDeJuego.IncrementarItemsAsignados();
+
 			}
-
-			if(negra)
-				camaConNinyoObjeto.sombrillaAsignada = CamaConNinyo.EstadoSombrilla.Negra;
-			else
-				camaConNinyoObjeto.sombrillaAsignada = CamaConNinyo.EstadoSombrilla.Blanca;
-
-			sombrilla.transform.position = gancho.transform.position;
-
-			sombrilla.transform.parent = gancho;
-
-			//Llamar al verificador pues se ha colocado una somrbilla
-			//Una vez se ha puesto la sombrilla, se verifica si se ha asignado correctamente
-			if(camaConNinyoObjeto.sombrillaAsignada == CamaConNinyo.EstadoSombrilla.Negra && !camaConNinyoObjeto.EsBueno
-			   ||
-			   camaConNinyoObjeto.sombrillaAsignada == CamaConNinyo.EstadoSombrilla.Blanca && camaConNinyoObjeto.EsBueno)
-			{
-				VerificadorFinDeJuego.IncrementarItemsCorrectos();
-			}
-			VerificadorFinDeJuego.IncrementarItemsAsignados();
-
-
-
-
-
 
 
 		}
@@ -149,24 +189,24 @@ public class Elfo : MonoBehaviour {
 
 	public void UsarManoMagica()
 	{
-		//Si no esta tocando maceta
-		if(maceta == null)
-			//no hace nada
-			return;
-
 		//Si esta tocando maceta
-		Reemplazable r = maceta.GetComponent<Reemplazable>();
-		if(r!= null)
-			r.Reemplazar();
-		else
-			Debug.LogWarning("La maceta no tiene script 'Reemplazable'");
+		if(maceta != null)
+		{
 
-		if(OnObjetoAccionado!= null)
-			OnObjetoAccionado(maceta.tag);
+			Reemplazable r = maceta.GetComponent<Reemplazable>();
+			if(r!= null)
+				r.Reemplazar();
+			else
+				Debug.LogWarning("La maceta no tiene script 'Reemplazable'");
 
-		maceta = null;
-		isTouchingMaceta = false;
+			if(OnObjetoAccionado!= null)
+				OnObjetoAccionado(maceta.tag);
 
+			maceta = null;
+			isTouchingMaceta = false;
+			//Reproducir Sonido de Chispas
+		}
+		audio.PlayOneShot(shimmer);
 
 
 	}
@@ -230,24 +270,7 @@ public class Elfo : MonoBehaviour {
 					objetoTocable.Accionar();
 				else
 					objetoTocable.Accionar(accion);
-				if(v != TipoVerificacion.ignorar)
-				{
-					if(objetoTocable.estado != Tocable.EstadoTocable.SinAsignar)
-					{
-						VerificadorFinDeJuego.DecrementarItemsAsignados();
-						if(objetoTocable.estado == Tocable.EstadoTocable.Correcto)
-						{
-							VerificadorFinDeJuego.DecrementarItemsCorrectos();
-						}
-					}
-					if(v == TipoVerificacion.correcto)
-					{
-						objetoTocable.estado = Tocable.EstadoTocable.Correcto;
-						VerificadorFinDeJuego.IncrementarItemsCorrectos();
-					}
-					objetoTocable.estado = Tocable.EstadoTocable.Incorrecto;
-					VerificadorFinDeJuego.IncrementarItemsAsignados();
-				}
+				UsarVerificador(v);
 
 			}
 			
