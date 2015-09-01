@@ -69,11 +69,7 @@ public class MovimientoPersonaje : MonoBehaviour
 			//Esa posicio esta dentro del mundo
 			if(d != Vector3.zero && triggerWorldBounds.bounds.Contains(d) )
 			{
-				destination = d;
-				PlaceFlare(d);
-				if(OnDirectionChanged != null)
-					OnDirectionChanged();
-				move = true;
+				GoTo(d);
 			}
 		}
 
@@ -157,6 +153,7 @@ public class MovimientoPersonaje : MonoBehaviour
 	{
 		ObjetoAR oar = GetComponentInChildren<ObjetoAR>();
 		oar.ToggleName();
+
 	}
 
 
@@ -174,6 +171,15 @@ public class MovimientoPersonaje : MonoBehaviour
 	public void DesactivarMovimiento()
 	{
 		Activo = false;
+	}
+
+	public void GoTo(Vector3 destination)
+	{
+		this.destination = destination;
+		PlaceFlare(destination);
+		if(OnDirectionChanged != null)
+			OnDirectionChanged();
+		move = true;
 	}
 
 

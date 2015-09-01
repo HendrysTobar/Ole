@@ -19,11 +19,17 @@ public class ObjetoAR : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-
+		//Si tocan este objeto
 		if(Touched())
-
 		{
+			//Activar o desactivar la etiqueta del nombre
 			ToggleName();
+			//Hacer que el elfo vaya hacia la posicion de este objeto
+			if(Elfo.instancia!=null)
+			{
+				Elfo.instancia.GoTo(this.transform.position);
+			}
+
 		}
 
 	}

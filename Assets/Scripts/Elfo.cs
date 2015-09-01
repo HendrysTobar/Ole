@@ -12,6 +12,11 @@ public class Elfo : MonoBehaviour {
 	public GameObject gym;
 	public AudioClip shimmer;
 
+	#region Singleton
+	public static Elfo instancia;
+	#endregion
+
+
 	#region Eventos
 	public delegate void TocableAccionadoHandler(string tagObjeto);
 	public TocableAccionadoHandler OnObjetoAccionado;
@@ -20,7 +25,7 @@ public class Elfo : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		instancia = this;
 	
 	}
 	
@@ -367,6 +372,15 @@ public class Elfo : MonoBehaviour {
 		
 
 	}
-
+	/// <summary>
+	/// Hace que el elfo vaya a la posicion indicada
+	/// Esto no hace que se dirija inmediatamente sino que establece la posicion indicada como el destino actual del 
+	/// script de MOvimientoPersonaje
+	/// </summary>
+	/// <param name="position">Position.</param>
+	public void GoTo (Vector3 position)
+	{
+		GetComponent<MovimientoPersonaje>().GoTo(position);
+	}
 
 }
