@@ -47,9 +47,34 @@ public class CargarEscenaTrackableEventHandler : MonoBehaviour, ITrackableEventH
 	{
 		SDialogManager.skipAllCurrentDialogs();
 		Debug.Log("Cargando escena " + this.name );
-		textoCargando.gameObject.SetActive(true);
+		if(textoCargando)
+			textoCargando.gameObject.SetActive(true);
 		yield return new WaitForEndOfFrame();
+
+		//Para cargar a nueva escena se ve si se puede cargar la escena o si se debe cargar la escena del candado
+		//tomamos el numero de la escena
+		//El numero de la escena debe estar en el nombre del Image Tracker
+		int numPagina;
+		if(!int.TryParse(this.name[this.name.Length - 1].ToString(), out numPagina ))
+		{
+			Debug.Log("No se conoce el numero de la pagina para cargar el nivel del candado");
+		}
+		else
+		{
+			//Si la pagina esta activada cargar la pagina
+			if(PaginasManager.Singleton.EstaActivada(numPagina))
+				Application.LoadLevel(this.name);
+			//Sino, cargar la pagina del candado
+			else
+			{
+				EscenaPaginaLocked.paginaQueSeIntentoCargar = this.name;
+				Application.LoadLevel("PaginaLocked");
+			}
+			yield return null;
+		}
+		//Si no se obtuvo el numero de la pagina simplemente no considera la pagina del candado
 		Application.LoadLevel(this.name);
+		yield return null;
 
 	}
 

@@ -102,6 +102,7 @@ public class EscenaPaginaDos : Escena {
 		if(gano)
 		{
 			dialogoGanaste.manualStart();
+			ActivarSiguienteEscena();
 			canvas2.SetActive(false);
 		}
 		else

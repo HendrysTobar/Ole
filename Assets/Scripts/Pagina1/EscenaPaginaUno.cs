@@ -40,6 +40,7 @@ public class EscenaPaginaUno : Escena {
 		{
 			//Activar dialogo ganar
 			Desactivar();
+			ActivarSiguienteEscena();
 			dialogoGanaste.manualStart();
 		}
 		else
@@ -49,6 +50,8 @@ public class EscenaPaginaUno : Escena {
 			dialogoIntenta.manualStart();
 		}
 	}
+
+
 
 
 
@@ -120,6 +123,12 @@ public abstract class Escena: MonoBehaviour
 			elfo.GetComponent<MovimientoPersonaje>().DesactivarMovimiento();
 		}
 	}
+
+	protected void ActivarSiguienteEscena()
+	{
+		PaginasManager.Singleton.ActivarSiguiente(Application.loadedLevelName);
+	}
+
 
 	public abstract void TerminarEscena(bool gano);
 }

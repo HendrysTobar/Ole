@@ -1,4 +1,4 @@
-﻿#define DEBUG_WITHOUT_AR
+﻿//#define DEBUG_WITHOUT_AR
 using UnityEngine;
 using System.Collections;
 
