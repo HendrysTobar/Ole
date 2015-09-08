@@ -10,6 +10,7 @@ public class EscenaPaginaCuatro : Escena {
 	new void  Start()
 	{
 		instancia = this;
+		SetInstance(this);
 	}
 
 	public void Exit()

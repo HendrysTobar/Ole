@@ -7,6 +7,11 @@ public class ObjetoAR : MonoBehaviour {
 	public string nombre;
 	public GameObject textComponent;
 	private AudioSource[] audios;
+	/// <summary>
+	/// Dice si el objeto esta activo, esto es, si recibe clicks. 
+	/// Se usa para pausar la deteccion de input de parte del jugador.
+	/// </summary>
+	bool activo = true;
 
 
 	// Use this for initialization
@@ -20,7 +25,7 @@ public class ObjetoAR : MonoBehaviour {
 	void Update () 
 	{
 		//Si tocan este objeto
-		if(Touched())
+		if(Touched() && activo)
 		{
 			//Activar o desactivar la etiqueta del nombre
 			ToggleName();
@@ -76,7 +81,8 @@ public class ObjetoAR : MonoBehaviour {
 			//Se ha usado el Touch, entonces no haga nada
 			return;
 		}
-		ToggleName();
+		if(activo)
+			ToggleName();
 
 	}
 
@@ -99,5 +105,15 @@ public class ObjetoAR : MonoBehaviour {
 		audios[a?1:0].Play();
 
 
+	}
+
+	public void Desactivar ()
+	{
+		activo = false;
+	}
+
+	public void Activar ()
+	{
+		activo = true;
 	}
 }

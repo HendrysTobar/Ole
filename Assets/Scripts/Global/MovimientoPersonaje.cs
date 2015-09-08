@@ -151,8 +151,13 @@ public class MovimientoPersonaje : MonoBehaviour
 	/// </summary>
 	void OnMouseDown()
 	{
-		ObjetoAR oar = GetComponentInChildren<ObjetoAR>();
-		oar.ToggleName();
+		if(activo)
+		{
+			ObjetoAR oar = GetComponentInChildren<ObjetoAR>();
+			oar.ToggleName();
+		}
+			
+			
 
 	}
 

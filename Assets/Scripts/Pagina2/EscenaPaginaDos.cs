@@ -28,6 +28,7 @@ public class EscenaPaginaDos : Escena {
 
 		elfo.OnObjetoAccionado += ContarArboles;
 		instancia = this;
+		SetInstance(this);
 	
 	}
 	
