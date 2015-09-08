@@ -77,7 +77,7 @@ public class EscenaPaginaDos : Escena {
 		//arbolCenador.SetActive(true);
 		GameObject ac = Instantiate(arbolCenador, worldGrupo.transform.position, worldGrupo.transform.rotation) as GameObject;
 		ac.transform.parent = worldGrupo.transform.parent;
-		ac.transform.localScale = Vector3.one;
+		ac.transform.localScale =Vector3.one;
 
 		Destroy(worldGrupo);
 

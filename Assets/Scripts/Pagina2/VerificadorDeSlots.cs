@@ -9,7 +9,10 @@ public class VerificadorDeSlots : MonoBehaviour {
 	void Start () {
 
 	}
-
+	bool hayFruta = false;
+	bool hayPastel = false;
+	bool hayFlor = false;
+	bool hayOtraCosa = false;
 	/// <summary>
 	/// Verificar si hay en el arbol al menos una fruta, un paste y una flor
 	/// <returns>
@@ -23,9 +26,10 @@ public class VerificadorDeSlots : MonoBehaviour {
 			slots = GetComponentsInChildren<Slot>();
 		}
 
-		bool hayFruta = false;
-		bool hayPastel = false;
-		bool hayFlor = false;
+		hayFruta = false;
+		hayPastel = false;
+		hayFlor = false;
+		hayOtraCosa = false;
 
 		foreach(Slot s in slots)
 		{
@@ -39,7 +43,10 @@ public class VerificadorDeSlots : MonoBehaviour {
 						hayPastel = true;
 					else
 						if(s.AdornoAsignado != TipoDeAdorno.Ninguno)
+						{
+							hayOtraCosa = true;
 							return false;
+						}
 
 		}
 		if(hayFruta && hayFlor && hayPastel)

@@ -20,13 +20,14 @@ public class Slot : MonoBehaviour {
 		DestruirObjetosHijos();
 
 		//se crea el adorno
-		GameObject a = new GameObject(adorno.ToString());
-		SpriteRenderer sr =  a.AddComponent<SpriteRenderer>();
+		GameObject nuevoAdorno = new GameObject(adorno.ToString());
+		SpriteRenderer sr =  nuevoAdorno.AddComponent<SpriteRenderer>();
 		sr.sprite = sprite;
-		a.transform.parent = this.transform;
-		a.transform.position = a.transform.parent.position;
-		a.transform.rotation = a.transform.parent.rotation;
-		a.transform.localScale = new Vector3(0.14f,0.14f,0.14f);
+		nuevoAdorno.transform.parent = this.transform;
+		nuevoAdorno.transform.position = nuevoAdorno.transform.parent.position;
+		//El adorno queda mirando hacia la camara
+		nuevoAdorno.transform.LookAt(EscenaOle.arCamera.transform);
+		nuevoAdorno.transform.localScale = new Vector3(0.14f,0.14f,0.14f);
 
 		adornoAsignado = adorno;
 
