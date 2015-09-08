@@ -27,13 +27,7 @@ public class ObjetoAR : MonoBehaviour {
 		//Si tocan este objeto
 		if(Touched() && activo)
 		{
-			//Activar o desactivar la etiqueta del nombre
-			ToggleName();
-			//Hacer que el elfo vaya hacia la posicion de este objeto
-			if(Elfo.instancia!=null)
-			{
-				Elfo.instancia.GoTo(this.transform.position);
-			}
+			ToggleAndGo();
 
 		}
 
@@ -82,7 +76,9 @@ public class ObjetoAR : MonoBehaviour {
 			return;
 		}
 		if(activo)
-			ToggleName();
+		{
+			ToggleAndGo();
+		}
 
 	}
 
@@ -97,7 +93,17 @@ public class ObjetoAR : MonoBehaviour {
 
 
 	}
-	
+
+	void ToggleAndGo ()
+	{
+		//Activar o desactivar la etiqueta del nombre
+		ToggleName();
+		//Hacer que el elfo vaya hacia la posicion de este objeto
+		if(Elfo.instancia!=null)
+		{
+			Elfo.instancia.GoTo(this.transform.position);
+		}
+	}	
 
 	void PlaySound (bool a)
 	{
