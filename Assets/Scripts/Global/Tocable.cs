@@ -13,7 +13,7 @@ public abstract class Tocable : MonoBehaviour {
 	// Use this for initialization
 	protected void Start () 
 	{
-		flarePosition = transform.Find("Flare");
+
 	}
 	
 	// Update is called once per frame
@@ -25,6 +25,8 @@ public abstract class Tocable : MonoBehaviour {
 
 	void SwitchFlare (bool isBeingTouched)
 	{
+		if(flarePosition == null)
+			flarePosition = transform.Find("Flare");
 		if(flarePosition != null)
 			flarePosition.gameObject.SetActive(isBeingTouched);
 	}

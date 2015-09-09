@@ -1,0 +1,5 @@
+#En este documento pongo anotaciones para tener en cuenta sobre los objetos del juego. Son anotaciones sobre cosas que se pueden olvidar para nuevas versiones.
+
+--- Elfo
+El elfo de la Pagina1 tiene asociado el prefab elfo, pero el resto de objetos "Elfo" en las otras páginas tienen asociado el prefab "Objeto".
+Esto debe repararse porque genera un conflicto con el otro objeto "Niño" que también tiene asociado el prefab "Objeto"

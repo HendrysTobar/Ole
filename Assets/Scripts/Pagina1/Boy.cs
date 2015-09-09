@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Boy : MonoBehaviour {
+public class Boy :Tocable {
 
 	public GameObject cama;
 	public GameObject camaConNinyo;
@@ -34,4 +34,23 @@ public class Boy : MonoBehaviour {
 		//Destruir el objeto de este script
 		Destroy(this.gameObject);
 	}
+
+	#region implemented abstract members of Tocable
+
+	public override void Accionar (int accion)
+	{
+		Dormirse();
+	}
+
+	public override void Touched ()
+	{
+
+	}
+
+	public override void UnTouched ()
+	{
+
+	}
+
+	#endregion
 }

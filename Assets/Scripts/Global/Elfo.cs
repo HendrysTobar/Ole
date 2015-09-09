@@ -305,27 +305,34 @@ public class Elfo : MonoBehaviour {
 	Tocable objetoTocable;
 	void OnTriggerEnter(Collider c)
 	{
+
+		//El objeto "something" es un puente entre la version anterior que no usaba la clase "Tocable" y la nueva version.
+		//El objeto something representa el objeto tocado de ambas versiones.
 		if(c.collider.CompareTag("Ninyo"))
 		{
 			isTouchingBoy = true;
-			ninyo = c.transform.parent.gameObject;
+			something = ninyo = c.transform.parent.gameObject;
 		}
 
 		if(c.gameObject.CompareTag("CamaConNinyo"))
 		{
 			isTouchingBed = true;
-			camaConNinyo = c.transform.parent.gameObject;
+			something = camaConNinyo = c.transform.parent.gameObject;
 		}
 		if(c.gameObject.CompareTag("Maceta"))
 		{
 			isTouchingMaceta = true;
-			maceta = c.transform.parent.gameObject;
+			something = maceta = c.transform.parent.gameObject;
 		}
 		///Genralizacion del proceso de identificar un objeto que se puede tocar
 		if(c.gameObject.CompareTag("Tocable"))
 		{
 			isTouchingSomething = true;
 			something = c.transform.parent.gameObject;
+		}
+		//Si algo se esta tocando, entonces marcarlo como Tocado para que aparezca el flare
+		if(something != null)
+		{
 			objetoTocable = something.GetComponent<Tocable>();
 			if(objetoTocable == null)
 			{
@@ -336,6 +343,7 @@ public class Elfo : MonoBehaviour {
 				objetoTocable.IsBeingTouched = true;
 			}
 		}
+
 
 	}
 
