@@ -370,7 +370,8 @@ public class Elfo : MonoBehaviour {
 		{
 			isTouchingSomething = false;
 			something = null;
-			objetoTocable.IsBeingTouched = false;
+			if(objetoTocable != null)
+				objetoTocable.IsBeingTouched = false;
 			objetoTocable = null;
 
 

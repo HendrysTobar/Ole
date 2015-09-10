@@ -30,6 +30,8 @@ public class MacetaTutorial :Tocable {
 		manoGUI.SetActive(false);
 		Destroy (this.gameObject);
 
+		if(onAccionado != null)
+			onAccionado();
 	}
 
 
@@ -47,6 +49,10 @@ public class MacetaTutorial :Tocable {
 	}
 
 
+	#endregion
+
+	#region Eventos
+	public System.Action onAccionado;
 	#endregion
 
 
