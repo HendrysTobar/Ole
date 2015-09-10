@@ -366,7 +366,7 @@ public class Elfo : MonoBehaviour {
 			maceta = null;
 		}
 		///Genralizacion del proceso de identificar un objeto que se puede tocar
-		if(c.gameObject.CompareTag("Tocable"))
+		if(c.gameObject.CompareTag("Tocable") || something != null)
 		{
 			isTouchingSomething = false;
 			something = null;
@@ -374,10 +374,7 @@ public class Elfo : MonoBehaviour {
 			objetoTocable = null;
 
 
-		}
-
-
-		
+		}		
 
 	}
 	/// <summary>
