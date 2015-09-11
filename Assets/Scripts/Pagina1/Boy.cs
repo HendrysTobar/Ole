@@ -53,4 +53,8 @@ public class Boy :Tocable {
 	}
 
 	#endregion
+
+	#region Eventos
+	public System.Action onDormido;
+	#endregion
 }

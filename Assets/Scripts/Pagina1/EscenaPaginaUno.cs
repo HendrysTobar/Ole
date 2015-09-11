@@ -14,7 +14,18 @@ public class EscenaPaginaUno : Escena {
 	// Use this for initialization
 	void Start () {
 		Camera.main.orthographic = true;
+		InitializeBoys();
 		SetInstance(this);
+	}
+
+	void InitializeBoys ()
+	{
+		Boy[] boys = FindObjectsOfType<Boy>();
+		foreach (var boy in boys) 
+		{
+			//boy.onDormido += NiñoDormido;
+		}
+
 	}
 
 	void PonerDialogoExplicativo ()
@@ -50,6 +61,7 @@ public class EscenaPaginaUno : Escena {
 			Desactivar();
 			dialogoIntenta.manualStart();
 		}
+		ActivarPasaPagina();
 	}
 
 

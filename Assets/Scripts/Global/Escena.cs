@@ -181,5 +181,15 @@ public abstract class Escena: MonoBehaviour
 		return GameObject.FindObjectOfType<SDialogController>() != null;
 	}
 
+	protected void ActivarPasaPagina()
+	{
+		GameObject pasaPagina = GameObject.Find("PasaLaPagina");
+		if(pasaPagina != null)
+		{
+			pasaPagina.GetComponent<UnityEngine.UI.Text>().enabled = true;
+
+		}
+	}
+
 	public abstract void TerminarEscena(bool gano);
 }

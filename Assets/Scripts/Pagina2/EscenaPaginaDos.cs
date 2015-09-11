@@ -83,7 +83,12 @@ public class EscenaPaginaDos : Escena {
 		//arbolCenador.SetActive(true);
 		GameObject ac = Instantiate(arbolCenador, worldGrupo.transform.position, worldGrupo.transform.rotation) as GameObject;
 		ac.transform.parent = worldGrupo.transform.parent;
-		ac.transform.localScale = Vector3.one;//new Vector3(200,200,200);
+#if DEBUG_WITHOUT_AR
+		ac.transform.localScale = new Vector3(200,200,200);
+#else
+		ac.transform.localScale = Vector3.one;
+#endif
+
 
 		Destroy(worldGrupo);
 
@@ -124,6 +129,7 @@ public class EscenaPaginaDos : Escena {
 
 
 		}
+		ActivarPasaPagina();
 
 	}
 	#endregion

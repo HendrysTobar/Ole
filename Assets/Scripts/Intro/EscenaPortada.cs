@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EscenaPortada : MonoBehaviour {
+public class EscenaPortada : Escena {
 	public SimpleDialogCall dialogoFin;
 	public MacetaTutorial maceta;
 	// Use this for initialization
@@ -18,7 +18,17 @@ public class EscenaPortada : MonoBehaviour {
 	void MacetaAccionada ()
 	{
 		dialogoFin.manualStart();
+		TerminarEscena();
 	}
+
+	#region implemented abstract members of Escena
+
+	public override void TerminarEscena (bool gano)
+	{
+		ActivarPasaPagina();
+	}
+
+	#endregion
 }
 
 
