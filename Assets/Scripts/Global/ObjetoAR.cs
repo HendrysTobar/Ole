@@ -85,7 +85,7 @@ public class ObjetoAR : MonoBehaviour {
 
 	public void ToggleName ()
 	{
-		Debug.Log("Toggling Name");
+		//Debug.Log("Toggling Name");
 		textComponent.SetActive(!textComponent.activeSelf);
 
 		PlaySound(textComponent.activeSelf);
@@ -99,9 +99,15 @@ public class ObjetoAR : MonoBehaviour {
 		//Activar o desactivar la etiqueta del nombre
 		ToggleName();
 		//Hacer que el elfo vaya hacia la posicion de este objeto
-		if(Elfo.instancia!=null)
+		//y este objeto no es el mismo elfo...
+		bool esElElfo = transform.parent.gameObject == Elfo.instancia.gameObject;
+		if(Elfo.instancia!=null && !esElElfo)
 		{
 			Elfo.instancia.GoTo(this.transform.position);
+		}
+		if(esElElfo)
+		{
+			Elfo.instancia.Tocado = true;
 		}
 	}	
 

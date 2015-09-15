@@ -21,7 +21,12 @@ public class Elfo : MonoBehaviour {
 	public delegate void TocableAccionadoHandler(string tagObjeto);
 	public TocableAccionadoHandler OnObjetoAccionado;
 	#endregion
-
+	#region Propiedades
+	public bool Tocado {
+		get;
+		set;
+	}
+	#endregion
 
 	// Use this for initialization
 	void Start () {
@@ -30,9 +35,9 @@ public class Elfo : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
-			
+		Tocado = false;
 	}
 
 	#region Metodos del Elfo

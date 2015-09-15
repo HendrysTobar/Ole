@@ -60,7 +60,9 @@ public class MovimientoPersonaje : MonoBehaviour
 		//Si no se esta dando click en un objeto de la GUI
 		//y
 		//El touch Helper no ha tocado algo
-		if(eventSystem.currentSelectedGameObject == null && !TouchHelper.HaTocadoAlgo && activo)
+		//y
+		//No se ha tocado el elfo en este frame
+		if(eventSystem.currentSelectedGameObject == null && !TouchHelper.HaTocadoAlgo && activo && !Elfo.instancia.Tocado )
 		{
 			//Capturamos la posicion deseada por el usuario
 			Vector3 d = Capture3DClickPosition();
@@ -90,7 +92,7 @@ public class MovimientoPersonaje : MonoBehaviour
 		Vector3 xy = Vector3.zero;
 		if(Input.touchCount > 0)
 		{
-			if(Input.GetTouch(0).phase == TouchPhase.Ended)
+			if(Input.GetTouch(0).phase == TouchPhase.Began)
 			{
 				Debug.Log("Se ha soltado el touch");
 				xy = Input.GetTouch(0).position;
@@ -154,6 +156,7 @@ public class MovimientoPersonaje : MonoBehaviour
 		if(activo)
 		{
 			ObjetoAR oar = GetComponentInChildren<ObjetoAR>();
+			Elfo.instancia.Tocado = true;
 			oar.ToggleName();
 		}
 			
