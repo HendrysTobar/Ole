@@ -12,6 +12,9 @@ public class AdornoGUIElement : MonoBehaviour,  IDragHandler, IEndDragHandler {
 	DragMe dragMe;
 	public TipoDeAdorno tipo;
 
+	private static Color COLOR_ICON_ON_SLOT = new Color(0.52f, 0.98f, 0.26f);
+	private static Color COLOR_DEFAULT_COLOR = Color.white;
+
 	void Start()
 	{
 		rh = new RaycastHelper(EscenaOle.arCamera);
@@ -33,6 +36,7 @@ public class AdornoGUIElement : MonoBehaviour,  IDragHandler, IEndDragHandler {
 			if(!apuntando)
 			{
 				AgrandarIcono();
+				CambiarColorIcono(COLOR_ICON_ON_SLOT);
 			}
 			//Entonces, establecer el estado a "apuntando"
 			apuntando = true;
@@ -58,9 +62,15 @@ public class AdornoGUIElement : MonoBehaviour,  IDragHandler, IEndDragHandler {
 		dragMe.EnlargeIcon();
 	}
 
+	void CambiarColorIcono (Color c)
+	{
+		dragMe.ChangeColorIcon(c);
+	}
+
 	void ResetearIcono ()
 	{
 		dragMe.ResetIconScale();
+		CambiarColorIcono(COLOR_DEFAULT_COLOR);
 	}
 
 	#endregion

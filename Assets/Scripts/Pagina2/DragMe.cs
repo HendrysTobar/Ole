@@ -9,7 +9,7 @@ public class DragMe : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 	
 	private GameObject m_DraggingIcon;
 	private RectTransform m_DraggingPlane;
-
+	private UnityEngine.UI.Image image;
 	public void OnBeginDrag(PointerEventData eventData)
 	{
 		var canvas = FindInParents<Canvas>(gameObject);
@@ -23,7 +23,7 @@ public class DragMe : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 		m_DraggingIcon.transform.SetParent (canvas.transform, false);
 		m_DraggingIcon.transform.SetAsLastSibling();
 		
-		var image = m_DraggingIcon.AddComponent<UnityEngine.UI.Image>();
+		image = m_DraggingIcon.AddComponent<UnityEngine.UI.Image>();
 		mOriginalIconScale = m_DraggingIcon.transform.localScale;
 		// The icon will be under the cursor.
 		// We want it to be ignored by the event system.
@@ -95,6 +95,10 @@ public class DragMe : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 		EnlargeIcon(1.3f);
 	}
 
+	public void ChangeColorIcon (Color color)
+	{
+		image.color = color;
+	}
 
 	public void ResetIconScale()
 	{
