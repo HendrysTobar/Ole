@@ -54,6 +54,7 @@ public class EscenaPaginaUno : Escena {
 			Desactivar();
 			ActivarSiguienteEscena();
 			dialogoGanaste.manualStart();
+			ActivarPasaPagina();
 		}
 		else
 		{
@@ -61,7 +62,7 @@ public class EscenaPaginaUno : Escena {
 			Desactivar();
 			dialogoIntenta.manualStart();
 		}
-		ActivarPasaPagina();
+
 	}
 
 

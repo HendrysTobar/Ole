@@ -116,6 +116,7 @@ public class EscenaPaginaDos : Escena {
 			dialogoGanaste.manualStart();
 			ActivarSiguienteEscena();
 			canvas2.SetActive(false);
+			ActivarPasaPagina();
 		}
 		else
 		{
@@ -129,7 +130,7 @@ public class EscenaPaginaDos : Escena {
 
 
 		}
-		ActivarPasaPagina();
+
 
 	}
 	#endregion
