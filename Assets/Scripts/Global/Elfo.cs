@@ -61,11 +61,16 @@ public class Elfo : MonoBehaviour {
 				{
 					objetoTocable.estado = Tocable.EstadoTocable.Correcto;
 					VerificadorFinDeJuego.IncrementarItemsCorrectos();
+					VerificadorFinDeJuego.IncrementarItemsAsignados();
 				}
-				objetoTocable.estado = Tocable.EstadoTocable.Incorrecto;
-				VerificadorFinDeJuego.IncrementarItemsAsignados();
+				if(v == TipoVerificacion.incorrecto)
+				{
+					objetoTocable.estado = Tocable.EstadoTocable.Incorrecto;
+					VerificadorFinDeJuego.IncrementarItemsAsignados();
+				}
 			}
 		}
+		VerificadorFinDeJuego.Log();
 	}
 
 

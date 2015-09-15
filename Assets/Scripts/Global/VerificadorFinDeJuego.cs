@@ -91,6 +91,11 @@ public class VerificadorFinDeJuego : MonoBehaviour {
 
 	/// <summary>
 	/// Incrementa el total de Items asignados en 1
+	/// Ademas verifica si los items han sido asignados todos.
+	/// Si todos son correctos, termina el juego con la bandera "gano"
+	/// Sino, termina el juego con la bandera "perdio".
+	/// Como es este el metodo que verifica que los items esten todos correctos, es importante incrementar los correctos
+	/// antes de los asignados.
 	/// </summary>
 	public static void IncrementarItemsAsignados()
 	{
