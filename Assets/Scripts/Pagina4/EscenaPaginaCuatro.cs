@@ -30,7 +30,7 @@ public class EscenaPaginaCuatro : Escena {
 		canvasCuadro.SetActive(true);
 		imageTarget.SetActive(false);
 
-		ActivarPasaPagina();
+
 	}
 
 }
