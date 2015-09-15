@@ -7,6 +7,7 @@ public class EscenaPortada : Escena {
 	// Use this for initialization
 	void Start () 
 	{
+		instance = this;
 		maceta.onAccionado += MacetaAccionada;
 	}
 	
